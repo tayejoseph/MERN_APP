@@ -6,10 +6,11 @@ const {
   deleteGoals,
   updateGoals,
 } = require("../controllers/goalControler");
+const { protect } = require("../middleware/authMiddleware");
 
 // chained request together in of writing it individually
-router.route("/").get(getGoals).post(setGoals);
-router.route("/:id").delete(deleteGoals).put(updateGoals);
+router.route("/").get(protect, getGoals).post(protect, setGoals);
+router.route("/:id").delete(protect, deleteGoals).put(protect, updateGoals);
 
 // router.get("/", getGoals);
 
